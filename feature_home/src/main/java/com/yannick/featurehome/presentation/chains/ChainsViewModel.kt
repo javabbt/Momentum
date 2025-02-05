@@ -2,6 +2,7 @@ package com.yannick.featurehome.presentation.chains
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.yannick.core.utils.CoroutinesDispatcherProvider
 import com.yannick.data.services.FirestoreService
@@ -10,6 +11,7 @@ import com.yannick.featurehome.domain.repositories.ChainsRepository
 import com.yannick.featurehome.presentation.shared.PhotosHolder
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -27,6 +29,13 @@ class ChainsViewModel(
 
     private val _sideEffect = MutableSharedFlow<SideEffect>()
     val sideEffect = _sideEffect.asSharedFlow()
+
+    private val _chains = MutableStateFlow<PagingData<Chain>>(PagingData.empty())
+    val chains: StateFlow<PagingData<Chain>> = _chains.asStateFlow()
+
+    init {
+        refreshChains()
+    }
 
     private fun sendSideEffect(sideEffect: SideEffect) {
         viewModelScope.launch {
@@ -47,14 +56,18 @@ class ChainsViewModel(
         }
     }
 
-    private var _chains = chainsRepository.getChains()
-        .cachedIn(viewModelScope)
-
-    val chains get() = _chains
+    private fun refreshChains() {
+        viewModelScope.launch {
+            chainsRepository.getChains()
+                .cachedIn(viewModelScope)
+                .collect { pagingData ->
+                    _chains.update { pagingData }
+                }
+        }
+    }
 
     fun reloadChains() {
-        _chains = chainsRepository.getChains()
-            .cachedIn(viewModelScope)
+        refreshChains()
     }
 }
 
