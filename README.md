@@ -18,7 +18,7 @@ daily active users by tapping into young adults' desire for meaningful digital c
 creative expression.
 
 ## Demo
-<video src="[https://user-images.githubusercontent.com/aaa.mp4](https://github.com/javabbt/Momentum/blob/main/demo.webm)"></video>
+[![Watch the video]]((https://github.com/javabbt/Momentum/blob/main/demo.webm))
 
 ## Tech-Stack
 
