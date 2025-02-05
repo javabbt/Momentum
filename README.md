@@ -17,6 +17,9 @@ user experience, Momentum aims to reach 1M
 daily active users by tapping into young adults' desire for meaningful digital connections and
 creative expression.
 
+## Demo
+<video src="[https://user-images.githubusercontent.com/aaa.mp4](https://github.com/javabbt/Momentum/blob/main/demo.webm)"></video>
+
 ## Tech-Stack
 
 This project incorporates industry best practices and utilizes a wide range of popular libraries and
