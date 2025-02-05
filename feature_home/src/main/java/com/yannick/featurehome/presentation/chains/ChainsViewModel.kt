@@ -49,6 +49,7 @@ class ChainsViewModel(
 
     private var _chains = chainsRepository.getChains()
         .cachedIn(viewModelScope)
+
     val chains get() = _chains
 
     fun reloadChains() {

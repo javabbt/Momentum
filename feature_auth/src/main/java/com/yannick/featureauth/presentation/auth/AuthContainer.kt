@@ -4,7 +4,6 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.credentials.Credential
@@ -13,7 +12,6 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.credentials.exceptions.GetCredentialProviderConfigurationException
 import androidx.credentials.exceptions.NoCredentialException
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.yannick.core.utils.HomeScreen
@@ -32,11 +30,6 @@ fun AuthContainer(
     val viewModel: AuthViewModel = koinViewModel()
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    uiState.user?.let {
-        navController.navigate(HomeScreen)
-    }
 
     LaunchedEffect(viewModel) {
         viewModel.sideEffects.onEach { sideEffect ->
@@ -55,6 +48,14 @@ fun AuthContainer(
                         sideEffect.msg,
                         Toast.LENGTH_SHORT,
                     ).show()
+                }
+
+                is SideEffect.LoginDone -> {
+                    navController.navigate(HomeScreen) {
+                        popUpTo(HomeScreen) {
+                            inclusive = true
+                        }
+                    }
                 }
             }
         }.collect()

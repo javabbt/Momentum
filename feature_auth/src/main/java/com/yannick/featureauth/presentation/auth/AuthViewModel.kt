@@ -45,6 +45,7 @@ class AuthViewModel(
                 signInWithGoogleUseCase(firebaseCredential)?.let { firebaseUser ->
                     _uiState.update { it.copy(user = firebaseUser) }
                 }
+                sendSideEffect(SideEffect.LoginDone)
             } else {
                 Timber.e("UNEXPECTED_CREDENTIAL")
                 sendSideEffect(SideEffect.ShowUnexpectedError(com.yannick.resources.R.string.unexpected_credential))
@@ -63,4 +64,5 @@ data class UiState(
 sealed class SideEffect {
     class ShowError(val msg: String) : SideEffect()
     class ShowUnexpectedError(@StringRes val msg: Int) : SideEffect()
+    data object LoginDone : SideEffect()
 }
