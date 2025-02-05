@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Momentum</string>
+    <string name="welcome_message">Welcome to Momentum</string>
+    <string name="join_friends_message">Join your friends in creating photo chains and share daily moments together</string>
+    <string name="enter_phone_number">Enter your phone number</string>
+    <string name="continue_button">Continue</string>
+    <string name="terms_privacy_message">By continuing, you agree to our Terms and Privacy Policy</string>
+    <string name="google_sign_in_button">Sign in with Google</string>
+    <string name="default_web_client_id">557830500131-kfj4e2sun3ea6q4ecvkpnabarmqf9nin.apps.googleusercontent.com</string>
+    <string name="login">Join your friends</string>
+    <string name="login_message">Log in to Momentum and connect with your friends to create beautiful photo chains and share unforgettable moments together!</string>
+    <string name="unexpected_credential">unexpected credential</string>
+    <string name="chains">Chains</string>
+    <string name="friends">Friends</string>
+    <string name="streaks">Streaks</string>
+    <string name="invite_friends">Invite friends</string>"
+    <string name="logout">Logout</string>
+    <string name="unexpected_error">Unexpected Error</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="nothing_found">No friends.</string>
+    <string name="no_chains">No Chains Yet!!</string>
+    <string name="chain_error">All the fields are required</string>
+    <string name="upload_done">Upload Done!!</string>
+    <string name="active_chains">Active chains</string>
+    <string name="participants_and_streak">%1$d participants • Streak: %2$d</string>
+    <string name="hours_left">%s h left</string>
+    <string name="chain_photo">Chain photo</string>
+    <string name="image_uploaded">Image Uploaded!!</string>
+    <string name="uploading">Uploading image!!</string>
+    <string name="momentum">Momentum</string>
+    <string name="new_chain">New Chain</string>
+    <string name="back">Back</string>
+    <string name="selected_image">Selected image</string>
+    <string name="add_theme_hint">Add theme (e.g., Morning Coffee)</string>
+    <string name="write_caption_hint">Write a caption…</string>
+    <string name="next">Next</string>
+    <string name="search">Search</string>
+    <string name="search_friends">Search Friends</string>
+    <string name="nothing_friends">Nothing found</string>
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+</resources>
