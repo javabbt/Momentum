@@ -32,7 +32,7 @@ jobs:
       - name: spotless
         run: ./gradlew spotlessApply
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: spotless-report
           path: ./**/build/reports/spotless/spotless.*
