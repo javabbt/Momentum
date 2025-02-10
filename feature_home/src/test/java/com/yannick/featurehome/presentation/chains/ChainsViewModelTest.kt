@@ -22,13 +22,13 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ChainsViewModelTest {
@@ -44,7 +44,7 @@ class ChainsViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    @Before
+    @BeforeEach
     fun setup() {
         Dispatchers.setMain(testDispatcher)
 
@@ -68,7 +68,7 @@ class ChainsViewModelTest {
         )
     }
 
-    @After
+    @AfterEach
     fun tearDown() {
         Dispatchers.resetMain()
     }
@@ -96,7 +96,6 @@ class ChainsViewModelTest {
         viewModel.state.test {
             val initial = awaitItem()
             assertFalse(initial.isLoading)
-
             viewModel.onImageSelected(testImage, testChain)
 
             assertTrue(awaitItem().isLoading) // Loading starts
@@ -115,20 +114,24 @@ class ChainsViewModelTest {
 
     @Test
     fun `reloadChains creates new paging data flow`() = runTest {
-        val pagingData1 = PagingData.empty<Chain>()
-        val pagingData2 = PagingData.empty<Chain>()
+        // Create test chains
+        val chain1 = Chain(id = "1")
+        val chain2 = Chain(id = "2")
 
-        every { chainsRepository.getChains() } returns flowOf(pagingData1)
+        viewModel.chains.test {
+            // Skip initial emission from setup
+            skipItems(1)
 
-        var collectedData1: PagingData<Chain>? = null
-        viewModel.chains.test { collectedData1 = awaitItem() }
+            every { chainsRepository.getChains() } returns flowOf(PagingData.from(listOf(chain1)))
+            viewModel.reloadChains()
+            awaitItem()
 
-        every { chainsRepository.getChains() } returns flowOf(pagingData2)
-        viewModel.reloadChains()
+            every { chainsRepository.getChains() } returns flowOf(PagingData.from(listOf(chain2)))
+            viewModel.reloadChains()
+            awaitItem()
 
-        var collectedData2: PagingData<Chain>? = null
-        viewModel.chains.test { collectedData2 = awaitItem() }
-
-        assertTrue(collectedData1 != collectedData2)
+            ensureAllEventsConsumed()
+        }
+        coVerify(exactly = 2) { chainsRepository.getChains() }
     }
 }

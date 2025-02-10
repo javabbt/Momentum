@@ -11,7 +11,7 @@ import com.yannick.domain.models.Friend
 import kotlinx.coroutines.tasks.await
 
 class FriendsPagingSource(
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseFirestore: FirebaseFirestore,
 ) : PagingSource<QuerySnapshot, Friend>() {
     override fun getRefreshKey(state: PagingState<QuerySnapshot, Friend>): QuerySnapshot? = null
 
@@ -28,7 +28,7 @@ class FriendsPagingSource(
                 LoadResult.Page(
                     data = emptyList(),
                     prevKey = null,
-                    nextKey = null
+                    nextKey = null,
                 )
             } else {
                 val currentPage = params.key ?: queryFriends.get().await()

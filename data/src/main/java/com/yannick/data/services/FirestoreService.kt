@@ -50,8 +50,8 @@ class FirestoreServiceImpl(
                         0,
                         "",
                         "",
-                        ""
-                    )
+                        "",
+                    ),
                 )
             } else {
                 Result.Success(ProfileStats(0, 0, 0, "", "", ""))
@@ -132,7 +132,7 @@ class FirestoreServiceImpl(
 
     override suspend fun updateProfileOfUser(
         userId: String,
-        profileStats: ProfileStats
+        profileStats: ProfileStats,
     ): Result<Unit> {
         return try {
             val onlineValue = firestore.collection(USERS_COLLECTION).document(userId).get().await()

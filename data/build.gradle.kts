@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.firebase.firestore.ktx)
     implementation(platform(libs.firebase.bom))
+    testImplementation(libs.junit.jupiter)
     testImplementation(libs.junit)
     testImplementation(project(":core"))
     androidTestImplementation(libs.androidx.junit)

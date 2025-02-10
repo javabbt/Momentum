@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class FriendsViewModel(
     private val friendsRepository: FriendsRepository,
     private val firestoreService: FirestoreService,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
 
     // Use StateFlow to hold the friends list

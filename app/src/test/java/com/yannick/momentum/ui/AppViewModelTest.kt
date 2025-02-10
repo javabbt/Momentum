@@ -4,7 +4,6 @@ import app.cash.turbine.test
 import com.yannick.core.testutils.MainCoroutineRule
 import com.yannick.core.testutils.runTest
 import com.yannick.core.theme.ThemePreferences
-import com.yannick.core.utils.provideFakeCoroutinesDispatcherProvider
 import com.yannick.domain.repositories.AuthRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -14,25 +13,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class AppViewModelTest {
 
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
-    
+
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var viewModel: AppViewModel
     private lateinit var themePreferences: ThemePreferences
     private lateinit var authRepository: AuthRepository
     private val isDarkModeFlow = MutableStateFlow(false)
 
-    @Before
+    @BeforeEach
     fun setup() {
         Dispatchers.setMain(testDispatcher)
 
@@ -45,7 +44,7 @@ class AppViewModelTest {
         coEvery { authRepository.isLoggedIn() } returns true
     }
 
-    @After
+    @AfterEach
     fun tearDown() {
         Dispatchers.resetMain()
     }

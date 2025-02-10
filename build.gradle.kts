@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.junit5) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.spotless)
 }
@@ -14,6 +15,11 @@ subprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+        testLogging {
+            showExceptions = true
+            showStandardStreams = true
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
     }
 }
 
@@ -68,6 +74,6 @@ configure(listOf(detektCheck, detektApply)) {
 buildscript {
     dependencies {
         classpath(libs.google.services)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
+        classpath(libs.kotlin.gradle.plugin)
     }
 }

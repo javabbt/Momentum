@@ -30,12 +30,12 @@ val homeModule = module {
     }
     single {
         FriendsPagingSource(
-            firebaseFirestore = get()
+            firebaseFirestore = get(),
         )
     }
     single {
         ChainsPagingSource(
-            firebaseFireStore = get()
+            firebaseFireStore = get(),
         )
     }
     single<FriendsRepository> {

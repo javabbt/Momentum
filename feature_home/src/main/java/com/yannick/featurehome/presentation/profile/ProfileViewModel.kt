@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val authRepository: AuthRepository,
     private val firestoreService: FirestoreService,
-    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider
+    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState = _uiState.asStateFlow()
@@ -41,7 +41,7 @@ class ProfileViewModel(
                         displayName = user.displayName ?: "",
                         profilePicture = user.photoUrl?.toString(),
                         username = user.uid,
-                        shortUserName = shortUserName
+                        shortUserName = shortUserName,
                     )
                 }
             }
@@ -51,7 +51,7 @@ class ProfileViewModel(
                         it.copy(
                             chains = stats.output.chains,
                             friends = stats.output.friends,
-                            streaks = stats.output.streaks
+                            streaks = stats.output.streaks,
                         )
                     }
                 }
@@ -87,5 +87,5 @@ data class ProfileUiState(
     val username: String = "",
     val profilePicture: String? = null,
     val displayName: String = "",
-    val shortUserName: String = ""
+    val shortUserName: String = "",
 )

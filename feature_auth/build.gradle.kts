@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.timber)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.play.services.auth)
 

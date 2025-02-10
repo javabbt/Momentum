@@ -27,6 +27,6 @@ fun FriendsContainer(
         modifier,
         onSearchClick = {
             navController.navigate(SearchFriends)
-        }
+        },
     )
 }

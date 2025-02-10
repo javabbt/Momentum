@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class SearchFriendViewModel(
     private val firestoreService: FirestoreService,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FriendsUiState())
@@ -39,11 +39,11 @@ class SearchFriendViewModel(
                                     friend = friend,
                                     isFollowing = firestoreService.canFollowUser(
                                         userId = authRepository.getCurrentUser()!!.uid,
-                                        friendId = friend.uid
-                                    )
+                                        friendId = friend.uid,
+                                    ),
                                 )
                             },
-                            isLoading = false
+                            isLoading = false,
                         )
                     }
                 }
@@ -63,12 +63,12 @@ class SearchFriendViewModel(
             if (friend.isFollowing) {
                 firestoreService.unfollowUser(
                     userId = authRepository.getCurrentUser()!!.uid,
-                    friendId = friend.friend
+                    friendId = friend.friend,
                 )
             } else {
                 firestoreService.followUser(
                     userId = authRepository.getCurrentUser()!!.uid,
-                    friendId = friend.friend
+                    friendId = friend.friend,
                 )
             }
             _uiState.update { state ->
@@ -79,7 +79,7 @@ class SearchFriendViewModel(
                         } else {
                             it
                         }
-                    }
+                    },
                 )
             }
         }
@@ -88,7 +88,7 @@ class SearchFriendViewModel(
 
 data class FriendFollow(
     val friend: Friend,
-    val isFollowing: Boolean
+    val isFollowing: Boolean,
 )
 
 data class FriendsUiState(

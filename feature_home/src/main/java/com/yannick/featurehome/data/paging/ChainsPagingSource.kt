@@ -13,7 +13,7 @@ import kotlinx.coroutines.tasks.await
 import org.joda.time.LocalDateTime
 
 class ChainsPagingSource(
-    private val firebaseFireStore: FirebaseFirestore
+    private val firebaseFireStore: FirebaseFirestore,
 ) : PagingSource<QuerySnapshot, Chain>() {
     override fun getRefreshKey(state: PagingState<QuerySnapshot, Chain>): QuerySnapshot? = null
 
@@ -31,7 +31,7 @@ class ChainsPagingSource(
                 LoadResult.Page(
                     data = emptyList(),
                     prevKey = null,
-                    nextKey = null
+                    nextKey = null,
                 )
             } else {
                 val currentPage = params.key ?: queryChains.get().await()

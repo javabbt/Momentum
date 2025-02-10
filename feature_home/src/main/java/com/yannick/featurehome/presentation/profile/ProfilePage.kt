@@ -84,7 +84,6 @@ fun ProfilePage(
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Gray,
             )
-            
         }
 
         // Stats Row

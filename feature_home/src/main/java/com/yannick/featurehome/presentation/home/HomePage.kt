@@ -155,7 +155,7 @@ fun HomePage(
 
             1 -> FriendsContainer(
                 modifier = Modifier.padding(innerPadding),
-                navController = navController
+                navController = navController,
             )
 
             2 -> ProfileContainer(

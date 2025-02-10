@@ -13,7 +13,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchFriendsContainer(
-    navController: NavController
+    navController: NavController,
 ) {
     val viewModel: SearchFriendViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -26,7 +26,7 @@ fun SearchFriendsContainer(
                     Toast.makeText(
                         context,
                         com.yannick.resources.R.string.nothing_friends,
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
             }

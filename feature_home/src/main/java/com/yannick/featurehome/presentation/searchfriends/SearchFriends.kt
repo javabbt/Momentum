@@ -65,18 +65,18 @@ fun SearchFriends(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Navigate back"
+                            contentDescription = "Navigate back",
                         )
                     }
-                }
+                },
             )
-        }
+        },
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
         ) {
             OutlinedTextField(
                 value = searchQuery,
@@ -88,18 +88,18 @@ fun SearchFriends(
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = "Search"
+                        contentDescription = "Search",
                     )
                 },
                 singleLine = true,
                 keyboardActions = KeyboardActions(
                     onSearch = {
                         onSearch(searchQuery)
-                    }
+                    },
                 ),
                 keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Search
-                )
+                    imeAction = ImeAction.Search,
+                ),
             )
 
             Spacer(modifier = Modifier.padding(4.dp))
@@ -118,13 +118,13 @@ fun SearchFriends(
             } else {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     // Add items here when you have data
                     items(friends.size) { index ->
                         val friend = friends[index]
                         Card(
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
                         ) {
                             Row(
                                 modifier = Modifier
@@ -154,7 +154,7 @@ fun SearchFriends(
 
                                 Button(
                                     onClick = { follow(friend) },
-                                    colors = ButtonDefaults.buttonColors(containerColor = if (friend.isFollowing) MaterialTheme.colorScheme.error else Blue)
+                                    colors = ButtonDefaults.buttonColors(containerColor = if (friend.isFollowing) MaterialTheme.colorScheme.error else Blue),
                                 ) {
                                     Text(stringResource(id = if (friend.isFollowing) com.yannick.resources.R.string.unfollow else com.yannick.resources.R.string.follow))
                                 }
@@ -163,8 +163,6 @@ fun SearchFriends(
                     }
                 }
             }
-
-
         }
     }
 }
