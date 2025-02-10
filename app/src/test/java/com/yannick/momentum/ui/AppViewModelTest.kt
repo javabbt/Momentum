@@ -25,9 +25,7 @@ class AppViewModelTest {
 
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
-
-    private val dispatcherProvider =
-        provideFakeCoroutinesDispatcherProvider(mainCoroutineRule.testDispatcher)
+    
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var viewModel: AppViewModel
     private lateinit var themePreferences: ThemePreferences

@@ -63,10 +63,6 @@ fun HomeContainer(
     HomeContainerNavGraph(navController, onDarkModeToggle, isDarkMode, startDestination)
 }
 
-object NavArgs {
-    const val PHOTOS_LIST = "photosList"
-}
-
 @Composable
 fun HomeContainerNavGraph(
     navController: NavHostController,
