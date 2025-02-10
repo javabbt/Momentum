@@ -1,11 +1,6 @@
 package com.yannick
 
 import androidx.paging.PagingConfig
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.yannick.data.services.FOLLOWERS_ROW
-import com.yannick.data.services.USER_CHAINS
 import com.yannick.featurehome.data.paging.ChainsPagingSource
 import com.yannick.featurehome.data.paging.FriendsPagingSource
 import com.yannick.featurehome.data.repositories.ChainsRepositoryImpl
@@ -35,20 +30,12 @@ val homeModule = module {
     }
     single {
         FriendsPagingSource(
-            queryFriends = FirebaseFirestore.getInstance().collection(FOLLOWERS_ROW)
-                .document(FirebaseAuth.getInstance().uid!!)
-                .collection(FOLLOWERS_ROW)
-                .orderBy("userName", Query.Direction.ASCENDING)
-                .limit(PAGE_SIZE),
+            firebaseFirestore = get()
         )
     }
     single {
         ChainsPagingSource(
-            queryChains = FirebaseFirestore.getInstance().collection(USER_CHAINS)
-                .document(FirebaseAuth.getInstance().uid!!)
-                .collection(USER_CHAINS)
-                .orderBy("deadline", Query.Direction.DESCENDING)
-                .limit(PAGE_SIZE),
+            firebaseFireStore = get()
         )
     }
     single<FriendsRepository> {
